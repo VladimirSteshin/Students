@@ -33,6 +33,15 @@ class Student:
         res = f'Имя: {self.name} \nФамилия: {self.surname} \nСредняя оценка за домашнее задание: {self.grade_stud_average} \nКурсы в процессе изучения: {self.courses_in_progress} \nЗавершенные курсы: {self.finished_courses}'
         return res
 
+    def __lt__(self, other):
+        if not isinstance(other, Student):
+            print('Это не студент!')
+            return
+        if self.grade_stud_average < other.grade_stud_average:
+            print(f'Студент {self.name} {self.surname} набрал меньший средний балл, чем студент {other.name} {other.surname}')
+        if self.grade_stud_average > other.grade_stud_average:
+            print(f'Студент {self.name} {self.surname} набрал больший средний балл, чем студент {other.name} {other.surname}')
+
 
 class Mentor:
     def __init__(self, name, surname):
@@ -74,6 +83,15 @@ class Lecturer(Mentor):
     def __str__(self):
         res = f'Имя: {self.name} \nФамилия: {self.surname} \nСредний балл: {self.grade_lect_average}'
         return res
+
+    def __lt__(self, other):
+        if not isinstance(other, Lecturer):
+            print('Это не лектор!')
+            return
+        if self.grade_lect_average < other.grade_lect_average:
+            print(f'Лектор {self.name} {self.surname} набрал меньший средний балл, чем лектор {other.name} {other.surname}')
+        if self.grade_lect_average > other.grade_lect_average:
+            print(f'Лектор {self.name} {self.surname} набрал больший средний балл, чем лектор {other.name} {other.surname}')
 
 
 class Reviewer(Mentor):
@@ -136,7 +154,6 @@ strict_reviewer.rate_hw(worst_student, 'Введение в программир
 strict_reviewer.rate_hw(worst_student, 'Введение в программирование', 6)
 strict_reviewer.rate_hw(worst_student, 'Введение в программирование', 4)
 
-
 some_lecturer.lector_grade_sum(some_lecturer)
 best_student.student_grade_sum(best_student)
 another_lecturer.lector_grade_sum(another_lecturer)
@@ -149,3 +166,11 @@ print()
 print(best_student)
 print()
 print(worst_student)
+print()
+some_lecturer.__lt__(another_lecturer)
+print()
+another_lecturer.__lt__(some_lecturer)
+print()
+best_student.__lt__(worst_student)
+print()
+worst_student.__lt__(best_student)
