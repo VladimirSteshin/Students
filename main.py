@@ -16,7 +16,23 @@ class Student:
             else:
                 lecturer.grades[course] = [grade]
         else:
-            return ('Ошибка')
+            return 'Ошибка'
+
+    def student_grade_sum(self, student):
+        grade_sum = 0
+        grade_len = 0
+        if isinstance(student, Student):
+            for number in self.grades:
+                grade_sum = sum(self.grades[number])
+            for count in self.grades.values():
+                grade_len = len(count)
+            self.grade_stud_average = round(grade_sum / grade_len, 1)
+            return
+
+    def __str__(self):
+        super().__str__()
+        res = f'Имя: {self.name} \nФамилия: {self.surname} \nСредняя оценка за домашнее задание: {self.grade_stud_average} \nКурсы в процессе изучения: {self.courses_in_progress} \nЗавершенные курсы: {self.finished_courses}'
+        return res
 
 
 class Mentor:
@@ -34,6 +50,10 @@ class Mentor:
         else:
             return 'Ошибка'
 
+    def __str__(self):
+        res = f'Имя: {self.name} \nФамилия: {self.surname}'
+        return res
+
 
 class Lecturer(Mentor):
     def __init__(self, name, surname):
@@ -41,10 +61,29 @@ class Lecturer(Mentor):
         self.grades = {}
         self.grade_lect_average = []
 
+    def lector_grade_sum(self, lecturer):
+        grade_sum = 0
+        grade_len = 0
+        if isinstance(lecturer, Lecturer):
+            for number in self.grades:
+                grade_sum = sum(self.grades[number])
+            for count in self.grades.values():
+                grade_len = len(count)
+            self.grade_lect_average = round(grade_sum / grade_len, 1)
+            return
+
+    def __str__(self):
+        res = f'Имя: {self.name} \nФамилия: {self.surname} \nСредний балл: {self.grade_lect_average}'
+        return res
+
 
 class Reviewer(Mentor):
     def __init__(self, name, surname):
         super().__init__(name, surname)
+
+    def __str__(self):
+        res = f'Имя: {self.name} \nФамилия: {self.surname}'
+        return res
 
 
 best_student = Student('Ruoy', 'Eman', 'male')
@@ -67,4 +106,9 @@ strict_reviewer.rate_hw(best_student, 'Python', 10)
 strict_reviewer.rate_hw(best_student, 'Python', 7)
 strict_reviewer.rate_hw(best_student, 'Python', 9)
 
-print(some_lecturer.grades)
+some_lecturer.lector_grade_sum(some_lecturer)
+best_student.student_grade_sum(best_student)
+
+print(some_lecturer)
+print('')
+print(best_student)
