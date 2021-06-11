@@ -25,22 +25,7 @@ class Mentor:
             return 'Ошибка'
 
 
-class Lecturer(Mentor):
-    def __init__(self, name, surname):
-        super().__init__(name, surname)
-        self.grades = {}
-        self.grade_lect_average = []
-
-
-class Reviewer(Mentor):
-    def __init__(self, name, surname):
-        super().__init__(name, surname)
-
-
 best_student = Student('Ruoy', 'Eman', 'male')
 best_student.courses_in_progress += ['Python']
 best_student.courses_in_progress += ['Git']
 best_student.finished_courses += ['Введение в программирование']
-
-some_lecturer = Lecturer("Some", "Buddy")
-some_lecturer.courses_attached += ['Python']
