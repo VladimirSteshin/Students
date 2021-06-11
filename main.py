@@ -9,8 +9,7 @@ class Student:
         self.grade_stud_average = []
 
     def lecturer_grade(self, lecturer, course, grade):
-        if isinstance(lecturer,
-                      Lecturer) and course in self.courses_in_progress and course in lecturer.courses_attached:
+        if isinstance(lecturer, Lecturer) and course in self.courses_in_progress or course in self.finished_courses and course in lecturer.courses_attached:
             if course in lecturer.grades:
                 lecturer.grades[course] += [grade]
             else:
@@ -42,7 +41,7 @@ class Mentor:
         self.courses_attached = []
 
     def rate_hw(self, student, course, grade):
-        if isinstance(student, Student) and course in self.courses_attached and course in student.courses_in_progress:
+        if isinstance(student, Student) and course in self.courses_attached and course in student.courses_in_progress or course in student.finished_courses:
             if course in student.grades:
                 student.grades[course] += [grade]
             else:
@@ -125,9 +124,18 @@ strict_reviewer.rate_hw(best_student, 'Python', 10)
 strict_reviewer.rate_hw(best_student, 'Python', 7)
 strict_reviewer.rate_hw(best_student, 'Python', 9)
 
-strict_reviewer.rate_hw(worst_student, 'Введение в программирование', 3)
-strict_reviewer.rate_hw(worst_student, 'Введение в программирование', 4)
+strict_reviewer.rate_hw(best_student, 'Введение в программирование', 9)
+strict_reviewer.rate_hw(best_student, 'Введение в программирование', 10)
+strict_reviewer.rate_hw(best_student, 'Введение в программирование', 9)
+
+strict_reviewer.rate_hw(worst_student, 'Python', 3)
+strict_reviewer.rate_hw(worst_student, 'Python', 4)
+strict_reviewer.rate_hw(worst_student, 'Python', 5)
+
 strict_reviewer.rate_hw(worst_student, 'Введение в программирование', 5)
+strict_reviewer.rate_hw(worst_student, 'Введение в программирование', 6)
+strict_reviewer.rate_hw(worst_student, 'Введение в программирование', 4)
+
 
 some_lecturer.lector_grade_sum(some_lecturer)
 best_student.student_grade_sum(best_student)
@@ -141,6 +149,3 @@ print()
 print(best_student)
 print()
 print(worst_student)
-
-# print(worst_student.grades)
-# print(another_lecturer.grades)
