@@ -1,6 +1,3 @@
-import pprint
-
-
 class Student:
     def __init__(self, name, surname, gender):
         self.name = name
@@ -12,7 +9,8 @@ class Student:
         self.grade_stud_average = []
 
     def lecturer_grade(self, lecturer, course, grade):
-        if isinstance(lecturer, Lecturer) and course in self.courses_in_progress or course in self.finished_courses and course in lecturer.courses_attached:
+        if isinstance(lecturer, Lecturer) and course in self.courses_in_progress or \
+                course in self.finished_courses and course in lecturer.courses_attached:
             if course in lecturer.grades:
                 lecturer.grades[course] += [grade]
             else:
@@ -33,7 +31,9 @@ class Student:
 
     def __str__(self):
         super().__str__()
-        res = f'Имя: {self.name} \nФамилия: {self.surname} \nСредняя оценка за домашнее задание: {self.grade_stud_average} \nКурсы в процессе изучения: {self.courses_in_progress} \nЗавершенные курсы: {self.finished_courses}'
+        res = f'Имя: {self.name} \nФамилия: {self.surname} \nСредняя оценка за домашнее задание: ' \
+              f'{self.grade_stud_average} \nКурсы в процессе изучения: {self.courses_in_progress} ' \
+              f'\nЗавершенные курсы: {self.finished_courses}'
         return res
 
     def __lt__(self, other):
@@ -41,9 +41,11 @@ class Student:
             print('Это не студент!')
             return
         if self.grade_stud_average < other.grade_stud_average:
-            print(f'Студент {self.name} {self.surname} набрал меньший средний балл, чем студент {other.name} {other.surname}')
+            print(f'Студент {self.name} {self.surname} набрал меньший средний балл, чем студент '
+                  f'{other.name} {other.surname}')
         if self.grade_stud_average > other.grade_stud_average:
-            print(f'Студент {self.name} {self.surname} набрал больший средний балл, чем студент {other.name} {other.surname}')
+            print(f'Студент {self.name} {self.surname} набрал больший средний балл, чем студент '
+                  f'{other.name} {other.surname}')
 
 
 class Mentor:
@@ -53,7 +55,8 @@ class Mentor:
         self.courses_attached = []
 
     def rate_hw(self, student, course, grade):
-        if isinstance(student, Student) and course in self.courses_attached and course in student.courses_in_progress or course in student.finished_courses:
+        if isinstance(student, Student) and course in self.courses_attached and course in \
+                student.courses_in_progress or course in student.finished_courses:
             if course in student.grades:
                 student.grades[course] += [grade]
             else:
@@ -84,7 +87,8 @@ class Lecturer(Mentor):
                         return 'Ошибка'
 
     def __str__(self):
-        res = f'Имя: {self.name} \nФамилия: {self.surname} \nСредний балл: {self.grade_lect_average}'
+        res = f'Имя: {self.name} \nФамилия: {self.surname} ' \
+              f'\nСредний балл: {self.grade_lect_average}'
         return res
 
     def __lt__(self, other):
@@ -92,9 +96,11 @@ class Lecturer(Mentor):
             print('Это не лектор!')
             return
         if self.grade_lect_average < other.grade_lect_average:
-            print(f'Лектор {self.name} {self.surname} набрал меньший средний балл, чем лектор {other.name} {other.surname}')
+            print(f'Лектор {self.name} {self.surname} '
+                  f'набрал меньший средний балл, чем лектор {other.name} {other.surname}')
         if self.grade_lect_average > other.grade_lect_average:
-            print(f'Лектор {self.name} {self.surname} набрал больший средний балл, чем лектор {other.name} {other.surname}')
+            print(f'Лектор {self.name} {self.surname} '
+                  f'набрал больший средний балл, чем лектор {other.name} {other.surname}')
 
 
 class Reviewer(Mentor):
@@ -157,36 +163,18 @@ strict_reviewer.rate_hw(worst_student, 'Введение в программир
 strict_reviewer.rate_hw(worst_student, 'Введение в программирование', 6)
 strict_reviewer.rate_hw(worst_student, 'Введение в программирование', 4)
 
-some_lecturer.lector_grade_sum(some_lecturer)
-best_student.student_grade_sum(best_student)
-another_lecturer.lector_grade_sum(another_lecturer)
-worst_student.student_grade_sum(worst_student)
-
-print(some_lecturer)
-print()
-print(another_lecturer)
-print()
-print(best_student)
-print()
-print(worst_student)
-print()
-some_lecturer.__lt__(another_lecturer)
-print()
-another_lecturer.__lt__(some_lecturer)
-print()
-best_student.__lt__(worst_student)
-print()
-worst_student.__lt__(best_student)
-print()
-
 stud_list = []
 stud_list.append(best_student)
 stud_list.append(worst_student)
 
-
 ment_list = []
 ment_list.append(some_lecturer)
 ment_list.append(another_lecturer)
+
+some_lecturer.lector_grade_sum(some_lecturer)
+best_student.student_grade_sum(best_student)
+another_lecturer.lector_grade_sum(another_lecturer)
+worst_student.student_grade_sum(worst_student)
 
 
 def student_average_count(members, course):
@@ -219,6 +207,22 @@ def lecturer_average_count(members, course):
     print(f'Средний балл лекторов по курсу "{course}": {result}')
 
 
+print(some_lecturer)
+print()
+print(another_lecturer)
+print()
+print(best_student)
+print()
+print(worst_student)
+print()
+some_lecturer.__lt__(another_lecturer)
+print()
+another_lecturer.__lt__(some_lecturer)
+print()
+best_student.__lt__(worst_student)
+print()
+worst_student.__lt__(best_student)
+print()
 student_average_count(stud_list, 'Введение в программирование')
 print()
 lecturer_average_count(ment_list, 'Python')
