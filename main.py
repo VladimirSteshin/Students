@@ -1,3 +1,6 @@
+import pprint
+
+
 class Student:
     def __init__(self, name, surname, gender):
         self.name = name
@@ -122,7 +125,7 @@ strict_reviewer = Reviewer("Robert", "Bolson")
 strict_reviewer.courses_attached += ['Python']
 strict_reviewer.courses_attached += ['Введение в программирование']
 
-best_student.lecturer_grade(some_lecturer, 'Python', 10)
+best_student.lecturer_grade(some_lecturer, 'Python', 9)
 best_student.lecturer_grade(some_lecturer, 'Python', 8)
 best_student.lecturer_grade(some_lecturer, 'Python', 9)
 
@@ -174,3 +177,48 @@ print()
 best_student.__lt__(worst_student)
 print()
 worst_student.__lt__(best_student)
+print()
+
+stud_list = []
+stud_list.append(best_student)
+stud_list.append(worst_student)
+
+
+ment_list = []
+ment_list.append(some_lecturer)
+ment_list.append(another_lecturer)
+
+
+def student_average_count(members, course):
+    marks = []
+    merged_marks = []
+    for student in members:
+        if isinstance(student, Student):
+            for key, value in student.grades.items():
+                if key == course:
+                    marks.append(value)
+    for items in marks:
+        for numbers in items:
+            merged_marks.append(numbers)
+    result = sum(merged_marks) / len(members)
+    print(f' Средний балл студентов по курсу "{course}": {result}')
+
+
+def lecturer_average_count(members, course):
+    marks = []
+    merged_marks = []
+    for lecturer in members:
+        if isinstance(lecturer, Lecturer):
+            for key, value in lecturer.grades.items():
+                if key == course:
+                    marks.append(value)
+    for items in marks:
+        for numbers in items:
+            merged_marks.append(numbers)
+    result = sum(merged_marks) / len(members)
+    print(f'Средний балл лекторов по курсу "{course}": {result}')
+
+
+student_average_count(stud_list, 'Введение в программирование')
+print()
+lecturer_average_count(ment_list, 'Python')
