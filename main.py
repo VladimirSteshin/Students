@@ -226,3 +226,4 @@ print()
 student_average_count(stud_list, 'Введение в программирование')
 print()
 lecturer_average_count(ment_list, 'Python')
+
